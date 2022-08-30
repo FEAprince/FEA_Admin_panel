@@ -49,6 +49,7 @@ const Customers = () => {
       headerName: <ColoumHead variant="h2">Profile Img</ColoumHead>,
       flex: 1, 
       sortable: false,
+      maxWidth: 100,
       renderCell: (params) => (
         <ImageAvatar
         variant="rounded"
@@ -62,6 +63,7 @@ const Customers = () => {
       headerName: <ColoumHead variant="h2">Name</ColoumHead>,
       flex: 1,
       sortable: false,
+      maxWidth: 400,
       renderCell: (params) => (
         <RowName>
           {params.row.firstName} {params.row.lastName}
@@ -74,6 +76,7 @@ const Customers = () => {
       headerName: <ColoumHead variant="h2">Email</ColoumHead>,
       flex: 1,
       sortable: false,
+      minWidth: 350,
       renderCell: (params) => <RowName>{params.row.email}</RowName>,
     },
     {
@@ -81,6 +84,7 @@ const Customers = () => {
       headerName: <ColoumHead variant="h2">PhoneNumber</ColoumHead>,
       flex: 1,
       sortable: false,
+      minWidth: 200,
       renderCell: (params) => <RowName>{params.row.phoneNumber}</RowName>,
     },
     {
@@ -240,7 +244,6 @@ const Customers = () => {
     <Container>
       <Grid container sx={{ paddingBottom: "20px" }}>
         <BreadcrumbArea />
-
         <Grid xs={5}>
           <Search>
             <SearchIconWrapper>

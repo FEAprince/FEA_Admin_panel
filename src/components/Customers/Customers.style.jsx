@@ -23,6 +23,7 @@ export const Container = styled(Box)(({ theme }) => ({
 }));
 
 export const TableGrid = styled(DataGrid)(({ theme }) => ({
+  width: "auto",
   overflow: "scroll", // eslint-disable-next-line
   overflow: "scroll",
   " &.MuiDataGrid-root .MuiDataGrid-cell": {
