@@ -1,7 +1,6 @@
 export function loadingStart() {
   return { type: "FETCH_DATA_START" };
 }
-
 export function loadingStop() {
   return { type: "FETCH_DATA_STOP" };
 }

@@ -7,8 +7,9 @@ import {
   onDeletionCustomers,
   onCustomersSearch,
   onCustomersloadingPagination,
+
 } from "../../js/actions";
-import { listBody } from "../../utils/Helper";
+import { ENDPOINTURLFORIMG, listBody } from "../../utils/Helper";
 import {
   Container,
   TableGrid,
@@ -20,7 +21,7 @@ import {
   Search,
   SearchIconWrapper,
   StyledInputBase,
-  MyButton,
+  ImageAvatar
 } from "./Customers.style";
 import BreadcrumbArea from "../BreadcrumbArea";
 import DialogBox from "../Dialog";
@@ -43,6 +44,19 @@ const Customers = () => {
   }, [page]);
   // this coloum makes sures that what types of Table Head we want to apply to our table(DataGrid)
   const columns = [
+    {
+      field: "avatar",
+      headerName: <ColoumHead variant="h2">Profile Img</ColoumHead>,
+      flex: 1, 
+      sortable: false,
+      renderCell: (params) => (
+        <ImageAvatar
+        variant="rounded"
+        alt="Category Image"
+        src={ENDPOINTURLFORIMG + params.row.userImg}
+      />
+      ),
+    },
     {
       field: "firstname",
       headerName: <ColoumHead variant="h2">Name</ColoumHead>,
@@ -155,11 +169,12 @@ const Customers = () => {
   };
 
   const captureSearch = async (data) => {
-    const body = {
-      searchText: data,
-    };
-    try {
+    console.log("check",typeof data)
+    if (data) {
       if (data.length >= 3) {
+        const body = {
+          searchText: data,
+        };
         dispatch(
           onCustomersSearch({
             body,
@@ -172,9 +187,30 @@ const Customers = () => {
           fetchCustomersList(listBody({ where: null, perPage: 10, page: page }))
         );
       }
-    } catch (error) {
-      alert(error);
+    } else {
+      if (data.length >= 10) {
+        
+        const body = {
+          searchText: data
+        };
+        dispatch(
+          onCustomersSearch({
+            body,
+            defaultPayload: listBody({ where: null, perPage: 10, page: page }),
+          })
+        );
+      }
+      if (data.length === 0) {
+        dispatch(
+          fetchCustomersList(listBody({ where: null, perPage: 10, page: page }))
+        );
+      }
     }
+
+
+
+
+
   };
   const getCustomersData = async () => {
     try {
@@ -199,6 +235,7 @@ const Customers = () => {
       alert(error);
     }
   };
+
   return (
     <Container>
       <Grid container sx={{ paddingBottom: "20px" }}>

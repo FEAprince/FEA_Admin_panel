@@ -7,10 +7,10 @@ import {
   productStatus,
   productDelete,
   searchHandlerData,
-  customersEditHandlerdata,
+  // customersEditHandlerdata,
   customersStatus,
-  customersDataHndlerData,
-  customersHandlerData,
+  // customersDataHndlerData,
+  customersHandler,
   searchCustomersData,
   customersDelete,
 } from "../../service/Auth.Service";
@@ -263,7 +263,7 @@ export const loggerMiddleware = (store) => (next) => (action) => {
         break;
       case "FETCH_CUSTOMERS":
         store.dispatch(loadingStart());
-        customersHandlerData(action.payload)
+        customersHandler(action.payload)
           .then((res) => {
             
             if (res) {
@@ -323,7 +323,7 @@ export const loggerMiddleware = (store) => (next) => (action) => {
       case "LOAD_PAGINATION_CUSTOMERS":
         store.dispatch(loadingStart());
         console.log("PAGE", action.payload.pagination.page);
-        customersHandlerData(action.payload)
+        customersHandler(action.payload)
           .then((res) => {
             if (res.success) {
               store.dispatch(fetchCustomersListSuccess(res));
